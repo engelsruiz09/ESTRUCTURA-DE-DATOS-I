@@ -1,0 +1,150 @@
+class nodo<T>{
+  nodo<T> raiz;
+  nodo<T> izquierda;
+  nodo<T> derecha;
+  T valor;
+};
+
+public class arbolABB<T>{
+  
+  Nodo<T> busqueda(Nodo<T> nodo, T Data){
+
+  if(nodo.valor == Data){
+    return Nodo;
+  }
+
+  else if(Data.Comparar(nodo.valor) == -1 ){ // si subarbol izq es mas alto
+    if(nodo.izquierda.valor == Data){
+      return nodo.izquierda;
+    }
+    else{
+      busqueda(nodo.izquierda,Data)
+    }
+
+  }
+  else{
+    else if(Data.Comparar(nodo.valor) == 1){ //si subarbol derecho es mas alto
+      if(nodo.derecha.valor == Data){
+        return Data;
+      }
+      else{
+        busqueda(nodo.derecha,Data)
+      }
+    }
+  }
+
+  //inicio parte Carlos
+  private Nodo<T> Buscar_espacio(Nodo<T> nodo) {//busca el nodo vacio
+    while (nodo.izquierda != null) {
+        nodo = nodo.izquierda;
+    }
+    return nodo;
+  }
+
+  public Nodo<T> Eliminar(Nodo<T> raiz, T valor){
+    if (raiz == null) {//verifica que el arbol tenga items
+        return null;
+    }
+    
+    if (valor < raiz.valor) { //recorrido corto de arbol para encontrar el valor
+        raiz.izquierda = Eliminar(raiz.izquierda, valor);
+    }
+    else if (valor > raiz.valor) {
+        raiz.derecha = Eliminar(raiz.derecha, valor);
+    }
+    else {//si hay al menos un hijo se cambia el valor padre por ese hijo
+        if (raiz.izquierda == null) {
+            return raiz.derecha;
+        }
+        else if (raiz.derecha == null) {
+            return raiz.izquierda;
+        }
+        else {//si hay 2 hijos se cambia la raiz actual (nodo a eliminar) por el valor del nodo mas a la derecha
+            Nodo<T> cambio = Buscar_espacio(raiz.derecha);
+            raiz.valor = cambio.valor;
+            raiz.derecha = Eliminar(raiz.derecha, cambio.valor);
+        }
+    }
+    
+    return raiz;
+  }
+
+  //fin parte Carlos
+
+  //Insersión
+  public static T Agregar(T Dato)
+  begin T
+
+    nodo Nuevo = new nodo
+    nodo AUX
+    Nuevo.Value = Dato
+    
+    if(Raiz == null)
+    begin if
+      Raiz = Nuevo
+    end if
+    
+    else if(Dato < Raiz.Value)
+    begin if
+      
+      if(Raiz.izquierda == null)
+      begin if
+        Raiz.izquierda = Nuevo
+      end if
+
+      else
+      begin else
+        AUX = Raiz.izquierda
+
+        while(AUX.izquierda != null or AUX.derecha != null)
+        begin while
+        
+        if(Dato < AUX.Value)
+        begin if
+          AUX = AUX.izquierda
+        end if
+        else if(Dato > AUX.Value)
+        begin if
+          AUX = AUX.derecha
+        end if
+
+        end while
+        Nuevo = AUX
+      end else
+
+    end if
+    
+    else if(Dato > Raiz.Value)
+    begin if
+
+      if(Raiz.derecha == null)
+      begin if
+        
+      end if
+      else
+      begin else
+        AUX = Raiz.derecha
+      
+        while(AUX.izquierda != null or AUX.derecha != null)
+        begin while
+        
+          if(Dato < AUX.Value)
+          begin if
+            AUX = AUX.izquierda
+          end if
+          else if(Dato > AUX.Value)
+          begin if
+            AUX = AUX.derecha
+          end if
+
+        end while
+        Nuevo = AUX
+      end else
+
+    end if
+  end T
+
+}
+
+
+}

@@ -1,0 +1,57 @@
+//pseudocódigo de árbol AVL (rotaciones y verificación de nivelación)
+//JULIO ANTHONY ENGELS RUIZ COTO 
+//EDDIE ALEJANDRO GIRON CARRANZA
+//BARRIENTOS CASTILLO CARLOS DANIEL
+
+Estructura NodoAVL:
+    valor: entero
+    izquierdo: NodoAVL
+    derecho: NodoAVL
+    altura: entero
+
+Función altura(nodo):
+    Si nodo es nulo, retornar -1
+    Sino, retornar nodo.altura
+
+Función factorEquilibrio(nodo):
+    Si nodo es nulo, retornar 0
+    Sino, retornar altura(nodo.derecho) - altura(nodo.izquierdo)
+
+Función rotacionDerecha(nodo):
+    nuevoPadre = nodo.izquierdo
+    nodo.izquierdo = nuevoPadre.derecho
+    nuevoPadre.derecho = nodo
+    nodo.altura = max(altura(nodo.izquierdo), altura(nodo.derecho)) + 1
+    nuevoPadre.altura = max(altura(nuevoPadre.izquierdo), altura(nuevoPadre.derecho)) + 1
+    retornar nuevoPadre
+
+Función rotacionIzquierda(nodo):
+    nuevoPadre = nodo.derecho
+    nodo.derecho = nuevoPadre.izquierdo
+    nuevoPadre.izquierdo = nodo
+    nodo.altura = max(altura(nodo.izquierdo), altura(nodo.derecho)) + 1
+    nuevoPadre.altura = max(altura(nuevoPadre.izquierdo), altura(nuevoPadre.derecho)) + 1
+    retornar nuevoPadre
+
+Función rotacionDobleIzquierda(nodo):
+    nodo.izquierdo = rotacionIzquierda(nodo.izquierdo)
+    retornar rotacionDerecha(nodo)
+
+Función rotacionDobleDerecha(nodo):
+    nodo.derecho = rotacionDerecha(nodo.derecho)
+    retornar rotacionIzquierda(nodo)
+
+Función insertar(nodo, valor):
+    Si nodo es nulo, crear un nuevo NodoAVL con valor y retornarlo
+    Sino si valor < nodo.valor, nodo.izquierdo = insertar(nodo.izquierdo, valor)
+    Sino si valor > nodo.valor, nodo.derecho = insertar(nodo.derecho, valor)
+    Sino, retornar el nodo
+    nodo.altura = max(altura(nodo.izquierdo), altura(nodo.derecho)) + 1
+    factor = factorEquilibrio(nodo)
+    Si factor > 1 y factorEquilibrio(nodo.derecho) >= 0, retornar rotacionIzquierda(nodo)
+    Si factor > 1 y factorEquilibrio(nodo.derecho) < 0, retornar rotacionDobleIzquierda(nodo)
+    Si factor < -1 y factorEquilibrio(nodo.izquierdo) <= 0, retornar rotacionDerecha(nodo)
+    Si factor < -1 y factorEquilibrio(nodo.izquierdo) > 0, retornar rotacionDobleDerecha(nodo)
+    retornar nodo
+
+   
